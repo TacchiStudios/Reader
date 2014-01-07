@@ -43,7 +43,8 @@
 
 #pragma mark Constants
 
-#define ZOOM_LEVELS 4
+#define ZOOM_LEVELS 3
+#define MAX_ZOOM_SCALE 8
 
 #if (READER_SHOW_SHADOWS == TRUE) // Option
 	#define CONTENT_INSET 4.0f
@@ -51,8 +52,8 @@
 	#define CONTENT_INSET 2.0f
 #endif // end of READER_SHOW_SHADOWS Option
 
-#define PAGE_THUMB_LARGE 240
-#define PAGE_THUMB_SMALL 144
+#define PAGE_THUMB_LARGE (768 / 2)
+#define PAGE_THUMB_SMALL (320 / 2)
 
 static void *ReaderContentViewContext = &ReaderContentViewContext;
 
@@ -81,7 +82,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 	self.minimumZoomScale = zoomScale; // Set the minimum and maximum zoom scales
 
-	self.maximumZoomScale = (zoomScale * ZOOM_LEVELS); // Max number of zoom levels
+	self.maximumZoomScale = (zoomScale * MAX_ZOOM_SCALE); // Max number of zoom levels
 
 	zoomAmount = ((self.maximumZoomScale - self.minimumZoomScale) / ZOOM_LEVELS);
 }
