@@ -50,8 +50,6 @@
 #define EMAIL_BUTTON_WIDTH 40.0f
 #define MARK_BUTTON_WIDTH 40.0f
 
-#define TITLE_HEIGHT 28.0f
-
 #pragma mark Properties
 
 @synthesize delegate;
@@ -203,7 +201,7 @@
 
 		if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
 		{
-			CGRect titleRect = CGRectMake(titleX, BUTTON_Y, titleWidth, TITLE_HEIGHT);
+			CGRect titleRect = CGRectMake(titleX, 0, titleWidth, self.frame.size.height);
 
 			UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleRect];
 
@@ -211,14 +209,17 @@
 			titleLabel.font = [UIFont systemFontOfSize:19.0f];
 			titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 			titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-			titleLabel.textColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
-			titleLabel.shadowColor = [UIColor colorWithWhite:0.65f alpha:1.0f];
+			titleLabel.textColor = [UIColor colorWithWhite:1.0f alpha:0.7f];
+//			titleLabel.shadowColor = [UIColor colorWithWhite:0.65f alpha:1.0f];
 			titleLabel.backgroundColor = [UIColor clearColor];
-			titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+//			titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 			titleLabel.adjustsFontSizeToFitWidth = YES;
 			titleLabel.minimumScaleFactor = 0.75f;
-			titleLabel.text = [object.fileName stringByDeletingPathExtension];
-
+			titleLabel.text = object.title ? object.title : [object.fileName stringByDeletingPathExtension];
+			
+			[titleLabel sizeToFit];
+			[titleLabel setCenter:CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)];
+			
 			[self addSubview:titleLabel]; 
 		}
 	}
